@@ -25,13 +25,14 @@
 		j return
 	
 	validation:
-		read_parameter:
+		identify_registers:
 			#number as string
 			move $t0,$a0
 			#base
 			move $t1,$a1
 			li $t2,'9'
 			li $t6,'0'
+			li $t5,'A'
 		while_loop:
 			lb $t3,0($t0)
 			beq $t3,$zero,print_goBack
@@ -45,7 +46,6 @@
 			j while_loop
 			
 		numbers_greater_than_nine:
-			li $t5,'A'
 			sub $t4,$t3,$t5
 			addi $t4,$t4,10
 			j check
