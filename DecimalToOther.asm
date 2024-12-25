@@ -73,12 +73,19 @@ DecimalToOther_loop:
     #move $a0, $t2
     #li $v0, 1
     #syscall
+    bgt $t2, 9, morethan10
     addi $t2, $t2, 48            # convert remainder to ASCII ('0' = 48)
-    sb $t2, digits($t1)          # save rem in the array
-    mflo $a0                     # get the quotient , number = number / base
-    addi $t1, $t1, 1             # i++
-    j DecimalToOther_loop
+    j store
 
+morethan10:
+     addi $t2, $t2, 55            # convert remainder to ASCII ('0' = 55)
+     
+store:
+    sb $t2, digits($t1)          
+    mflo $a0                     
+    addi $t1, $t1, 1             
+    j DecimalToOther_loop
+    
 DecimalToOther_done:
     sb $zero, digits($t1)        # Null-terminate the string
     sub $t4, $t1, 1              #t4 = the last digit index
