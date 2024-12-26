@@ -255,6 +255,7 @@ done_printing:
 printDecimal:
    li $v0, 1
    syscall  
+   jr $ra
    
 #---- new system error ---- 
 
